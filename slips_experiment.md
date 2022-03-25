@@ -26,6 +26,12 @@
 template，   ensembling,   threatintelligence1（16）, blocking（2）,     portscanDetector-1（12）,    timeline（17）,     virustotal（19）,     rnn-cc-detection-1（14）,    flowmldetection（7）
 
 # Slips实验
+## 安装
+docker当中没有安装  apt update && apt install -y --no-install-recommends python3-tzlocal zeek
+跳过
+RUN npm set registry https://registry.npm.taobao.org/
+RUN npm install blessed blessed-contrib redis@3.1.2 async chalk@4.1.2 strip-ansi@6.0.0 clipboardy fs sorted-array-async yargs
+
 ## 开启redis服务：
 ./redis-server /media/wuguo-buaa/LENOVO_USB_HDD/redis-3.2.8/redis.conf
 ###修改max_user_watches
