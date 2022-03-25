@@ -32,6 +32,15 @@ docker当中没有安装  apt update && apt install -y --no-install-recommends p
 RUN npm set registry https://registry.npm.taobao.org/
 RUN npm install blessed blessed-contrib redis@3.1.2 async chalk@4.1.2 strip-ansi@6.0.0 clipboardy fs sorted-array-async yargs
 
+## 打开
+docker run -it --rm --net=host --cap-add=NET_ADMIN stratosphereips/slips:latest
+
+./slips.py -c slips.conf -i eno1 -p
+
+（**以下是非capture模式，只能读文件**）
+docker run -it --rm --net=host slips
+
+./slips.py -c slips.conf -f dataset/test3.binetflow
 ## 开启redis服务：
 ./redis-server /media/wuguo-buaa/LENOVO_USB_HDD/redis-3.2.8/redis.conf
 ###修改max_user_watches
