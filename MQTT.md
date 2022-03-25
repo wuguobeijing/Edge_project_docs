@@ -21,7 +21,9 @@ MQTT 协议的全称是 Message Queuing Telemetry Transport，翻译为消息队
 3、安全性
 ### EMQX
 broker
-```sudo docker pull emqx/emqx:4.4.1```
+```
+sudo docker pull emqx/emqx:4.4.1```
+```
 ```
 docker run -d --name emqx -p 1883:1883 -p 8081:8081 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx
 ```
