@@ -129,6 +129,13 @@ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```$ docker stop <容器 ID>```
 **或者重启停止的容器**
 ```docker restart <容器 ID>```
+
+### docker-compose
+docker-compose up -d                    基于docker-compose.yml启动管理容器
+docker-compose down                     **关闭并删除容器**
+docker-compose start|stop|restart       开启|关闭|重启已经存在的由docker-compose维护的容器
+docker-compose ps                       查看由docker-compose管理的容器
+docker-compose logs -f                  查看日志
 ### 导出和导入容器
 
 **导出容器**
