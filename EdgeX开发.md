@@ -132,11 +132,11 @@ mock-device-driver
 **打开监听程序并进行功能测试**
 包括：
 testping
-
+![](assets/EdgeX开发-062a69fc.png)
 testrandnum
-
+![](assets/EdgeX开发-7feb5063.png)
 testmessage
-
+![](assets/EdgeX开发-c3e2eecd.png)
 #### 过程
 从command微服务发送一个命令出来，转发到了device_service微服务，也就是device-mqtt微服务
 device-mqtt发送到注册broker
