@@ -91,14 +91,55 @@ services:
   app-service-rules、app-service-sample、command、consul、data（有两处）、database、device-rest、device-virtual、metadata、notifications、rulesengine、scheduler、system
   共14处的127.0.0.0被修改为0。0。0。0
   ![](assets/EdgeX开发-0c2f0ac6.png)
-  ### Modbus功能实现
+  ### Modbus自动更新数据功能实现
 写了两个文件：
 **robot.profile.yml**
 **device.config.toml**
 从git上克隆edgex-compose到edgex-compose文件夹，把包含上述两个设备相关文件的文件夹custom-config添加到compose-builder目录中
 
     make gen ds-modbus
-
+![](assets/EdgeX开发-be7964c2.png)
 在资源下的docker-compose.yml中加入device-modbus微服务的相关配置地址
+![](assets/EdgeX开发-c3fc8104.png)
+![](assets/EdgeX开发-024ba362.png)
+**上传device profile到metadata**
+![](assets/EdgeX开发-2665b585.png)
+**上传设备基本配置到metadata**
+![](assets/EdgeX开发-29b2b3a4.png)
+**set方法测试到command**
+![](assets/EdgeX开发-8c514f60.png)
+**set方法测试到command**
+![](assets/EdgeX开发-3af408ad.png)
 
-![](assets/EdgeX开发-26c39995.png)
+(把volume地址改为了edgex_compose_Modbus尚未测试)
+### MQTT通讯
+完全按照EdgeX官网测试还是会有restarting问题
+相关链接：
+#### 结构
+![](assets/EdgeX开发-8a622d8b.png)
+#### 修改配置文件
+将geneva的composefile——docker-compose-geneva-redis-no-secty.yml修改为docker-compose.yml
+向其中添加mqtt与ui的服务，不做内容修改
+**打开4000端口的UI录入设备**
+![](assets/EdgeX开发-6aaaadbf.png)
+**打开EMQX broker的docker**
+![](assets/EdgeX开发-15603a9c.png)
+#### MQTT client
+mock-device-driver
+模拟一个基于mqtt协议通信的虚拟device，用于演示EdgeX Foundry的device-mqtt设备微服务的通信演示。两个独立线程，主线程负责接收处理命令，子线程负责模拟device的主动发送数据能力。
+假设这个python脚本就是边缘物理设备上的驱动，用于监听命令，响应命令，且具备主动发送数据的能力。
+
+**打开监听程序并进行功能测试**
+包括：
+testping
+
+testrandnum
+
+testmessage
+
+#### 过程
+从command微服务发送一个命令出来，转发到了device_service微服务，也就是device-mqtt微服务
+device-mqtt发送到注册broker
+
+### Kuiper与EdgeX Foundry集成
+[Kuiper与EdgeX Foundry集成实践](https://www.jianshu.com/p/0726d41b00bf)
