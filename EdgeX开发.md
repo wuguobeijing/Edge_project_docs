@@ -111,19 +111,25 @@ services:
 **set方法测试到command**
 ![](assets/EdgeX开发-3af408ad.png)
 
-(把volume地址改为了edgex_compose_Modbus尚未测试)
 ### MQTT通讯
-完全按照EdgeX官网测试还是会有restarting问题
+
 相关链接：
+[EdgeX系列之三 -- 连接MQTT设备](https://blog.csdn.net/ewtewtewrt/article/details/110382703)
+[MQTT--EdgeX - Edinburgh Release](https://docs.edgexfoundry.org/1.2/examples/Ch-ExamplesAddingMQTTDevice/)
+
 #### 结构
 ![](assets/EdgeX开发-8a622d8b.png)
 #### 修改配置文件
 将geneva的composefile——docker-compose-geneva-redis-no-secty.yml修改为docker-compose.yml
 向其中添加mqtt与ui的服务，不做内容修改
+![](assets/EdgeX开发-dccec601.png)
 **打开4000端口的UI录入设备**
 ![](assets/EdgeX开发-6aaaadbf.png)
 **打开EMQX broker的docker**
 ![](assets/EdgeX开发-15603a9c.png)
+修改Key/Value -> edgex -> devices -> 1.0 -> edgex-device-mqtt -> Driver
+修改IncomingHost字段和ReponseHost字段为broker主机地址，也就是emqx镜像运行的主机地址
+![](assets/EdgeX开发-4cd85c68.png)
 #### MQTT client
 mock-device-driver
 模拟一个基于mqtt协议通信的虚拟device，用于演示EdgeX Foundry的device-mqtt设备微服务的通信演示。两个独立线程，主线程负责接收处理命令，子线程负责模拟device的主动发送数据能力。
@@ -131,6 +137,7 @@ mock-device-driver
 
 **打开监听程序并进行功能测试**
 包括：
+![](assets/EdgeX开发-3e99bdb1.png)
 testping
 ![](assets/EdgeX开发-062a69fc.png)
 testrandnum
@@ -139,7 +146,21 @@ testmessage
 ![](assets/EdgeX开发-c3e2eecd.png)
 #### 过程
 从command微服务发送一个命令出来，转发到了device_service微服务，也就是device-mqtt微服务
-device-mqtt发送到注册broker
+(coreCommands-->deviceCommands-->deviceResources)
+device-mqtt发送到注册broker。broker将内容发布到订阅这个CommandTopic的客户端上，客户端对此进行响应。
+响应后将结果发送至ResponseData，根据订阅来完成反馈
+
+#### v1
+v1版本包含modbus的rtu与tcp两种通信模式以及mqtt通讯
+##### modbus
+![](assets/EdgeX开发-86b230c3.png)
 
 ### Kuiper与EdgeX Foundry集成
 [Kuiper与EdgeX Foundry集成实践](https://www.jianshu.com/p/0726d41b00bf)
+
+在Kuiper微服务中添加Kuiper stream和Kuiper rule，即可自动发布订阅内容
+其中sql当中包含对数据的处理规则
+**select * from edgex_stream**表示将这个在Kuiper 中创建的流全部发至RuleTestTopic
+![](assets/EdgeX开发-10384eef.png)
+**SELECT DemandWindowSize FROM edgex_stream WHERE LineFrequency = 0**表示将这个在Kuiper 中创建的流有选择的至RuleTestTopic
+![](assets/EdgeX开发-8ec57d0b.png)
