@@ -152,9 +152,16 @@ device-mqtt发送到注册broker。broker将内容发布到订阅这个CommandTo
 
 #### v1
 v1版本包含modbus的rtu与tcp两种通信模式以及mqtt通讯
-##### modbus
-![](assets/EdgeX开发-86b230c3.png)
 
+##### modbus
+**设备和指令界面**
+![](assets/EdgeX开发-86b230c3.png)
+**定期进行几个参数的获取**
+![](assets/EdgeX开发-b8128bbc.png)
+**modbus rtu**
+需要在边缘设备中模拟modbus rtu设备
+![](assets/EdgeX开发-ac200ade.png)
+（端口选择232、485通用端口）
 ### Kuiper与EdgeX Foundry集成
 [Kuiper与EdgeX Foundry集成实践](https://www.jianshu.com/p/0726d41b00bf)
 
