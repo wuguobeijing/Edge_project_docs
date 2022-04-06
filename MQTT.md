@@ -40,3 +40,7 @@ Qos2（只有一次）发送消息后，检测broker的确认信息，随后才�
 
 ## 场景复现
 客户端：MQTT Explorer & MQTTX，需要有一个broker作为中间人
+
+## EMQX数据入库
+### mysql
+#### 安装mysql
