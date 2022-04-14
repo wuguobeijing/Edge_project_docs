@@ -77,7 +77,7 @@ disable = [template , ensembling , RiskIQ , blocking , http_analyzer , ThreatInt
 
 **禁用大多数模块disable unmarked**
 
-disable = [template , ensembling , template , RiskIQ , blocking , http_analyzer , ThreatIntelligence1 , IP_Info , ExportingAlerts , UpdateManager , flowalerts , CESNET , virustotal]
+disable = [template , ensembling , RiskIQ , blocking , http_analyzer , ThreatIntelligence1 , IP_Info , ExportingAlerts , UpdateManager , flowalerts , CESNET , virustotal]
 
 ## 打开界面
 ./kalipso.sh
@@ -110,3 +110,18 @@ redis-cli: BGSAVE
 重新启用时，复制到redis_database中并改名为dump.rbd
 
 最后再打开redis
+
+## in 工控机
+### redis
+安装在/usr/local/bin/下
+配置conf文件地址：
+/usr/local/bin/redis-server /etc/redis/redis.conf
+
+### zeek
+#### 安装
+      ./configure && make && sudo make install
+#### 修改软连接路径
+      sudo ln --symbolic /usr/local/zeek/bin/zeek /usr/bin/zeek
+#### 添加环境
+      export PATH=$PATH:/usr/local/zeek/bin
+      source ~/.bashrc
