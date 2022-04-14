@@ -129,8 +129,13 @@ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```$ docker stop <容器 ID>```
 **或者重启停止的容器**
 ```docker restart <容器 ID>```
+**重命名**
+docker rename <容器 ID> <新名字>
+想真正修改容器名称需要通过修改var/lib/docker/containers里面的内容
+[docker容器改名](https://www.jb51.net/article/225440.htm)
 **查看docker的某一个服务的日志**
 ```docker logs ***（镜像名字）```
+
 ### docker-compose
 docker-compose up -d                    基于docker-compose.yml启动管理容器
 docker-compose down                     **关闭并删除容器**
@@ -144,7 +149,7 @@ docker-compose logs -f                  查看日志
 ```$ docker export <容器 ID> > <任意名字>.tar```
 **导入容器快照**
 可以使用 docker import 从容器快照文件中再导入为镜像，以下实例将快照文件 ubuntu.tar 导入到镜像 test/ubuntu:v1:
-```$ cat docker/ubuntu.tar | docker import - test/ubuntu:v1```
+```$ cat /media/wuguo-buaa/LENOVO_USB_HDD/dockers_file/hadoop100_413.tar | docker import - hadoop100:latest```
 **通过指定 URL 或者某个目录来导入**
 ```$ docker import http://example.com/exampleimage.tgz example/imagerepo```
 ### 删除容器
