@@ -199,6 +199,7 @@ yum -y install rsync
 |设备名称 |wuguo-buaa | hadoop100|hadoop101| k |
 |  ----  | ----  |  ----  |  ----  |  ----  |
 |**zk** | myid:2  |  ----- | -----  | myid:1 |
+|**kafka** | kafka |  ----- | -----  | kafka |
 **启动脚本**
 
       #!/bin/bash
@@ -232,5 +233,11 @@ yum -y install rsync
  zk.sh stop
  3)client客户端
  /media/wuguo-buaa/LENOVO_USB_HDD/Software/zookeeper-3.7.0$bin/zkCli.sh -server wuguo-buaa:2181
- 
+
 ## kafka
+（基于发布订阅模式，而不是生产消费模式【点对点】）
+**编写kf.sh**
+kf.sh start需要在zk.sh start之后，zk.sh stop需要在kf.sh stop之前
+目前使用基于zookeeper版本
+### kraft模式
+kf2.sh start

@@ -125,3 +125,18 @@ redis-cli: BGSAVE
 #### 添加环境
       export PATH=$PATH:/usr/local/zeek/bin
       source ~/.bashrc
+
+## 如何在工控机开启slips
+工控机cpu版本较低，不支持avx指令
+
+      ubuntu tensorflow非法指令(核心已转储)
+需要把rnn模块置于禁用模块状态
+首先开启./home/wuguo-buaa/PycharmProjects/StratosphereLinuxIPS/kalipso.sh
+网卡监听需要使用sudo权限
+sudo /home/wuguo-buaa/anaconda3/envs/slips/bin/python3.8 /home/wuguo-buaa/PycharmProjects/StratosphereLinuxIPS/slips.sh
+### 全部模块
+template , ensembling , RiskIQ , blocking , http_analyzer , ThreatIntelligence1 , IP_Info , ExportingAlerts , UpdateManager , flowalerts , CESNET , virustotal , ARP , flowmldetection , leak_detector , portscanDetector , rnn-cc-detection-1 , timeline
+**删除模块**
+template , ensembling , RiskIQ , blocking , http_analyzer , ThreatIntelligence1 , IP_Info , ExportingAlerts , UpdateManager  , CESNET , virustotal  ,  rnn-cc-detection-1
+**保留模块**
+leak_detector , portscanDetector , flowalerts , ARP , flowmldetection , timeline
