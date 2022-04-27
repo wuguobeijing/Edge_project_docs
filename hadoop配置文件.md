@@ -144,7 +144,6 @@
 wuguo-buaa
 hadoop100
 hadoop101
-k
 
 ## 第一次初始化的Version
 wuguo-buaa@wuguo-buaa:/media/wuguo-buaa/LENOVO_USB_HDD/Software/hadoop-3.3.0/data/dfs/name/current$ cat VERSION
@@ -299,7 +298,10 @@ layoutVersion=-65
       </configuration>
 **workers**
 wuguo-buaa
-k
+hadoop100
+hadoop101
+
+同步需要使用xsync_hadoop命令
 
 ## 第一次初始化的Version
 wuguo-buaa@wuguo-buaa:/media/wuguo-buaa/LENOVO_USB_HDD/Software/hadoop-3.3.0/data/dfs/name/current$ cat VERSION

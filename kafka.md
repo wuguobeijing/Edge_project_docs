@@ -111,7 +111,7 @@ docker export 04da08d38dfd > hadoop_docker.tar
 ### 再开启一个新平台
 //docker run -it --name hadoop101 -v /media/wuguo-buaa/LENOVO_USB_HDD/Software:/usr/local/software hadoop101:latest /bin/bash
 docker run -itd --privileged -h hadoop100 --name hadoop100 -v /media/wuguo-buaa/LENOVO_USB_HDD/Software:/usr/local/software hadoop100:latest /usr/sbin/init
-docker run -itd --privileged -h hadoop100 --name hadoop101 --ip=172.17.0.2 -v /etc/hosts:/etc/hosts hadoop101:latest /usr/sbin/init
+docker run -itd --privileged -h hadoop101 --name hadoop101 --ip=172.17.0.2 -v /etc/hosts:/etc/hosts hadoop101:latest /usr/sbin/init
 docker run -itd --privileged -h hadoop100 --name hadoop100 --ip=172.17.0.3 -v /etc/hosts:/etc/hosts hadoop100:latest /usr/sbin/init
 **带端口映射**
 docker run -itd --privileged -h hadoop101 --name hadoop101 -p 1922:22 -p 12888:2888 -p 13888:3888 --ip=172.17.0.2 -v /etc/hosts:/etc/hosts hadoop101:latest /usr/sbin/init
@@ -231,7 +231,12 @@ yum -y install rsync
  zk.sh start
 2)Zookeeper 集群停止脚本
  zk.sh stop
- 3)client客户端
+ 3）kafka-eagle
+ ke.sh start
+ ### 在spark使用前
+ 1）myhadoop.sh start
+ 2)
+**zk client客户端**
  /media/wuguo-buaa/LENOVO_USB_HDD/Software/zookeeper-3.7.0$bin/zkCli.sh -server wuguo-buaa:2181
 
 ## kafka
@@ -241,3 +246,8 @@ kf.sh start需要在zk.sh start之后，zk.sh stop需要在kf.sh stop之前
 目前使用基于zookeeper版本
 ### kraft模式
 kf2.sh start
+
+kraft模式不能使用kafka-eagle
+如果在kafka-eagle上删除topic需要输入**keadmin**这一token（存在kafka-eagle/conf中）
+
+![](assets/kafka-d8c09cab.png)
