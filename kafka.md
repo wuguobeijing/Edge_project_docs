@@ -251,3 +251,7 @@ kraft模式不能使用kafka-eagle
 如果在kafka-eagle上删除topic需要输入**keadmin**这一token（存在kafka-eagle/conf中）
 
 ![](assets/kafka-d8c09cab.png)
+
+# 由于kafka会占用大量工控机磁盘空间
+**目前将主机端的kf.sh文件修改了，同时修改了kafka/config/ server.properties的一处**
+conn2kafka这一个文件用来把全部切片后的log文件发送到kafka broker中，大小一共130多G，3亿多条
