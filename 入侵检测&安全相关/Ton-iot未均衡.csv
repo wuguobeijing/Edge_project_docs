@@ -1,0 +1,9 @@
+模型,全名,预测速度,训练速度, 验证表现,,,,,,
+,,,,roc_auc,accuracy,balanced_accuracy,mcc,f1,precision,recall
+XGB,XGBoost极端梯度提升,4.66E-06,
+RF,Random forest随机森林,4.39E-06,
+GBM,LightGBM轻度梯度提升机,2.59E-06,
+CAT,CatBoost分割梯度提升,2.43E-06,
+XT,extremely randomized trees极度随机树,4.78E-06,
+NN,neural network implemented in Pytorch,9.79E-06,
+FastAI,neural network with FastAI backend,1.03E-05,
