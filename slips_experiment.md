@@ -140,3 +140,27 @@ template , ensembling , RiskIQ , blocking , http_analyzer , ThreatIntelligence1 
 template , ensembling , RiskIQ , blocking , http_analyzer , ThreatIntelligence1 , IP_Info , ExportingAlerts , UpdateManager  , CESNET , virustotal  ,  rnn-cc-detection-1
 **保留模块**
 leak_detector , portscanDetector , flowalerts , ARP , flowmldetection , timeline
+
+### 流程
+slips.py加载初始参数（数据库、检测源等）
+
+根据用户指定的生效模块来进行功能模块的初始化，采用多线程机制来开启模块，模块继承自slips_files/common/abstracts.py中的Moudle抽象类以及多线程的基类（多继承）
+
+在ml方法中，首先加载之前训练过的模型
+从数据库中订阅new_flow的数据，在死循环当中使用get_message方法获取数据，进行数据核验。
+
+ flow = json.loads(flow)
+ 把每一个新的flow内容加载到 self.flow_dict中
+**训练阶段**
+ 每50个数据进行一次重新训练
+ 将全部数据转为pandas dataframe
+ 模型使用SGD分类器，借助其自身可以在线增量学习且资源占用小的优势部署在边缘端内部
+ self.clf = SGDClassifier(warm_start=True, loss='hinge', penalty="l1")
+**验证阶段（实现模型阶段）**
+预测阶段将单一一个flow作为dataframe
+在flow的label属性当中就会存入预测的结果
+if pred[0] == 'Malware'
+set_evidence_malicious_flow
+把相应的参数组加入到证据中
+
+根据证据来确定是否启用Blocking模块，在iptables中添加该语句
